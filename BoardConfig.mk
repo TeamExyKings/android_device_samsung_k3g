@@ -47,7 +47,10 @@ BOARD_NEEDS_MEMORYHEAPION := true
 TARGET_HAS_LEGACY_CAMERA_HAL1 := true
 
 # Shim
-TARGET_LD_SHIM_LIBS := /system/bin/gpsd|libdmitry.so:/system/lib/libsec-ril.so|libsec-ril_shim.so:/system/vendor/lib/egl/libGLES_mali.so|libgutils.so
+TARGET_LD_SHIM_LIBS := \
+    /system/bin/gpsd|libdmitry.so \
+    /system/lib/libsec-ril.so|libsec-ril_shim.so \
+    /system/vendor/lib/egl/libGLES_mali.so|libgutils.so
 
 # Device Tree
 BOARD_USES_DT := true
