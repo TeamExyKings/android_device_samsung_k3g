@@ -201,3 +201,6 @@ BOARD_SECCOMP_POLICY += device/samsung/k3gxx/seccomp
 
 # USB
 TARGET_USES_LEGACY_ADB_INTERFACE := true
+
+# HIDL Manifest
+DEVICE_MANIFEST_FILE := $(LOCAL_PATH)/manifest.xml

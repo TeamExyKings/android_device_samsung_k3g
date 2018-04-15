@@ -25,6 +25,8 @@ PRODUCT_PACKAGES += \
 
 # Audio
 PRODUCT_PACKAGES += \
+		android.hardware.audio@2.0-impl \
+    android.hardware.audio.effect@2.0-impl \
     audio.a2dp.default \
     audio.usb.default \
     audio.r_submix.default \
@@ -41,7 +43,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     android.hardware.bluetooth@1.0-impl \
     libbt-vendor
-    
+
 # Boot animation
 TARGET_BOOTANIMATION_HALF_RES := true
 TARGET_SCREEN_HEIGHT := 1920
@@ -51,16 +53,16 @@ TARGET_SCREEN_WIDTH := 1080
 PRODUCT_PACKAGES += \
     Snap
 
+# Consumerir
+PRODUCT_PACKAGES += \
+    android.hardware.ir@1.0-impl \
+    consumerir.universal5422
+
 # Display
 PRODUCT_PACKAGES += \
     SamsungServiceMode
 
-# SHIM LIBS
-PRODUCT_PACKAGES += \
-    libdmitry \
-    libsec-ril_shim \
-    libgutils
-
+# GPS
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/gps/gps.conf:system/etc/gps.conf \
     $(LOCAL_PATH)/configs/gps/gps.xml:system/etc/gps.xml
@@ -72,34 +74,46 @@ PRODUCT_COPY_FILES += \
 # if the xhdpi doesn't exist.
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
-PRODUCT_AAPT_PREBUILT_DPI := xxxhdpi xxhdpi xhdpi hdpi 
+PRODUCT_AAPT_PREBUILT_DPI := xxxhdpi xxhdpi xhdpi hdpi
 
-# HIDL
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/manifest.xml:system/vendor/manifest.xml
-
-# HW composer
+# Graphics
 PRODUCT_PACKAGES += \
+		android.hardware.graphics.allocator@2.0-impl \
+    android.hardware.graphics.allocator@2.0-service \
+    android.hardware.graphics.composer@2.1-impl \
+    android.hardware.graphics.mapper@2.0-impl \
+    android.hardware.memtrack@1.0-impl \
     libion \
     libfimg \
-    gralloc.exynos5 \
+    gralloc.exynos5
 
-# Consumerir
-PRODUCT_PACKAGES += \
-    android.hardware.ir@1.0-impl \
-    consumerir.universal5422
+# Keylayouts
+PRODUCT_COPY_FILES += \
+		$(LOCAL_PATH)/configs/keylayout/gpio_keys_8.kl:system/usr/keylayout/gpio_keys_8.kl \
+		$(LOCAL_PATH)/configs/keylayout/sec_touchkey.kl:system/usr/keylayout/sec_touchkey.kl \
+		$(LOCAL_PATH)/configs/idc/Synaptics_HID_TouchPad.idc:/system/usr/idc/Synaptics_HID_TouchPad.idc
 
 # Keymaster
 PRODUCT_PACKAGES += \
     android.hardware.keymaster@3.0-impl
 
+# Keystore
+PRODUCT_PACKAGES += \
+    keystore.exynos5
+
 # Lights
 PRODUCT_PACKAGES += \
+		android.hardware.light@2.0-impl \
     lights.universal5422
 
-# Power
-PRODUCT_PACKAGES += \
-    power.universal5422
+# Media profile
+PRODUCT_COPY_FILES += \
+		frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
+		frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
+		frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml \
+		$(LOCAL_PATH)/configs/media/media_codecs.xml:system/etc/media_codecs.xml \
+		$(LOCAL_PATH)/configs/media/media_profiles.xml:system/etc/media_profiles.xml \
+		$(LOCAL_PATH)/configs/media/media_codecs_performance.xml:system/etc/media_codecs_performance.xml
 
 # NFC
 PRODUCT_PACKAGES += \
@@ -118,15 +132,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/nfc/libnfc-brcm.conf:system/etc/libnfc-brcm.conf \
     $(LOCAL_PATH)/configs/nfc/libnfc-sec.conf:system/etc/libnfc-sec.conf \
     $(LOCAL_PATH)/configs/nfc/libnfc-nxp.conf:system/etc/libnfc-nxp.conf
-
-# Media profile
-PRODUCT_COPY_FILES += \
-	frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
-	frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
-	frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml \
-	$(LOCAL_PATH)/configs/media/media_codecs.xml:system/etc/media_codecs.xml \
-	$(LOCAL_PATH)/configs/media/media_profiles.xml:system/etc/media_profiles.xml \
-	$(LOCAL_PATH)/configs/media/media_codecs_performance.xml:system/etc/media_codecs_performance.xml
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -161,6 +166,7 @@ PRODUCT_COPY_FILES += \
 
 # Power
 PRODUCT_PACKAGES += \
+		android.hardware.power@1.0-impl \
     power.universal5422
 
 # Ramdisk
@@ -172,20 +178,12 @@ PRODUCT_PACKAGES += \
     init.universal5422.usb.rc \
     init.wifi.rc \
     ueventd.universal5422.rc \
-    init.power.rc 
-
-# Samsung Doze
-# PRODUCT_PACKAGES += \
-#    SamsungDoze
-
-# Keylayouts
-PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/configs/keylayout/gpio_keys_8.kl:system/usr/keylayout/gpio_keys_8.kl \
-	$(LOCAL_PATH)/configs/keylayout/sec_touchkey.kl:system/usr/keylayout/sec_touchkey.kl \
-	$(LOCAL_PATH)/configs/idc/Synaptics_HID_TouchPad.idc:/system/usr/idc/Synaptics_HID_TouchPad.idc
+    init.power.rc
 
 # Radio
 PRODUCT_PACKAGES += \
+		android.hardware.radio@1.0 \
+		android.hardware.radio.deprecated@1.0 \
     libsecril-client \
     libsecril-client-sap \
     rild \
@@ -193,20 +191,20 @@ PRODUCT_PACKAGES += \
     libril \
     modemloader \
     libxml2 \
-    libprotobuf-cpp-full \
-    android.hardware.radio@1.0 \
-    android.hardware.radio.deprecated@1.0
+    libprotobuf-cpp-full
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.carrier=unknown
 
-# MTP
-PRODUCT_PACKAGES += \
-    com.android.future.usb.accessory
+# Samsung Doze
+# PRODUCT_PACKAGES += \
+#    SamsungDoze
 
-# Keystore
+# SHIM LIBS
 PRODUCT_PACKAGES += \
-    keystore.exynos5
+    libdmitry \
+    libsec-ril_shim \
+    libgutils
 
 # Sensors
 PRODUCT_PACKAGES += \
@@ -216,12 +214,21 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     sensors.universal5422
 
+# USB
+PRODUCT_PACKAGES += \
+    android.hardware.usb@1.0-service \
+		com.android.future.usb.accessory
+
+# Vibrator
+PRODUCT_PACKAGES += \
+    android.hardware.vibrator@1.0-impl
+
 # WIFI
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/wifi/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
     $(LOCAL_PATH)/configs/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
-    $(LOCAL_PATH)/configs/wifi/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf 
-        
+    $(LOCAL_PATH)/configs/wifi/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf
+
 PRODUCT_PACKAGES += \
     android.hardware.wifi@1.0 \
     android.hardware.wifi@1.0-impl \
